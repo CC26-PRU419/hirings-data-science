@@ -1,0 +1,25 @@
+# Environments & Credentials
+.env
+.env.*
+*.secret
+
+# Python & Notebook caches
+__pycache__/
+*.py[cod]
+*$py.class
+.ipynb_checkpoints/
+
+# Data & Output Files (terlalu besar untuk GitHub)
+*.csv
+*.pkl
+*.npy
+*.npz
+33k/
+1.3m/
+salary/
+
+# Lainnya
+.DS_Store
+.vscode/
+*_files/
+*.html

@@ -1,0 +1,78 @@
+job_postings shape: (123849, 31)
+job_skills shape: (213768, 2)
+job_industries shape: (164808, 2)
+=== MISSING VALUES ===
+                        column  missing_count  missing_pct
+19                 closed_time         122776        99.13
+21                 skills_desc         121410        98.03
+9                   med_salary         117569        94.93
+14              remote_allowed         108603        87.69
+12                     applies         100529        81.17
+10                  min_salary          94056        75.94
+4                   max_salary          94056        75.94
+5                   pay_period          87776        70.87
+27           compensation_type          87776        70.87
+28           normalized_salary          87776        70.87
+26                    currency          87776        70.87
+23              posting_domain          39968        32.27
+16             application_url          36665        29.60
+20  formatted_experience_level          29409        23.75
+30                        fips          27415        22.14
+29                    zip_code          20872        16.85
+7                   company_id           1717         1.39
+1                 company_name           1719         1.39
+8                        views           1689         1.36
+3                  description              7         0.01
+
+=== DUPLICATES ===
+Total duplicate rows: 0
+Duplicate job_id: 0
+
+=== DATA TYPES ===
+job_id                          int64
+company_name                   object
+title                          object
+description                    object
+max_salary                    float64
+pay_period                     object
+location                       object
+company_id                    float64
+views                         float64
+med_salary                    float64
+min_salary                    float64
+formatted_work_type            object
+applies                       float64
+original_listed_time          float64
+remote_allowed                float64
+job_posting_url                object
+application_url                object
+application_type               object
+expiry                        float64
+closed_time                   float64
+formatted_experience_level     object
+skills_desc                    object
+listed_time                   float64
+posting_domain                 object
+sponsored                       int64
+work_type                      object
+currency                       object
+compensation_type              object
+normalized_salary             float64
+zip_code                      float64
+fips                          float64
+dtype: object
+
+=== BASIC STATISTICS ===
+             job_id    max_salary  ...       zip_code          fips
+count  1.238490e+05  2.979300e+04  ...  102977.000000  96434.000000
+mean   3.896402e+09  9.193942e+04  ...   50400.491887  28713.879887
+std    8.404355e+07  7.011101e+05  ...   30252.232515  16015.929825
+min    9.217160e+05  1.000000e+00  ...    1001.000000   1003.000000
+25%    3.894587e+09  4.828000e+01  ...   24112.000000  13121.000000
+50%    3.901998e+09  8.000000e+04  ...   48059.000000  29183.000000
+75%    3.904707e+09  1.400000e+05  ...   78201.000000  42077.000000
+max    3.906267e+09  1.200000e+08  ...   99901.000000  56045.000000
+
+[8 rows x 16 columns]
+
+Shape after cleaning: (123842, 31)

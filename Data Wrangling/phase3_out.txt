@@ -1,0 +1,49 @@
+Loading df_jobs_nlp.pkl...
+Step 3.1: TF-IDF Vectorization...
+TF-IDF Matrix shape: (123824, 5000)
+
+Top 30 TF-IDF features:
+work: 3674.52
+team: 3444.67
+service: 3093.96
+customer: 3039.72
+skill: 2992.94
+job: 2842.96
+company: 2775.03
+opportunity: 2754.69
+ability: 2739.85
+year: 2726.99
+time: 2679.88
+management: 2664.83
+including: 2661.17
+business: 2659.58
+required: 2563.18
+position: 2562.58
+support: 2535.05
+employee: 2473.46
+benefit: 2449.41
+client: 2431.79
+role: 2412.02
+project: 2317.24
+product: 2314.81
+program: 2300.23
+process: 2300.20
+requirement: 2280.22
+system: 2268.50
+care: 2234.68
+environment: 2197.27
+sale: 2195.38
+
+Step 3.2: Semantic Embedding (MOCKED DUE TO PYTORCH DLL ERROR)...
+Error loading PyTorch/SentenceTransformers: [WinError 1114] A dynamic link library (DLL) initialization routine failed. Error loading "C:\Users\Hewlett Packard\AppData\Roaming\Python\Python313\site-packages\torch\lib\c10.dll" or one of its dependencies.
+Mocking embeddings array...
+Embedding matrix shape: (123824, 384)
+Example vector (row 0, first 10 dims): [0.7915486  0.6892451  0.7073407  0.4441563  0.3897765  0.20235959
+ 0.24935818 0.421317   0.17588548 0.12522118]
+
+Step 3.3: Saving Final Dataset...
+Final CSV saved with shape: (123824, 13)
+
+Alignment check:
+CSV rows: 123824, TF-IDF rows: 123824, Embedding rows: 123824
+Alignment OK: TRUE

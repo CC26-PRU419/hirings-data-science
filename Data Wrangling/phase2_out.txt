@@ -1,0 +1,20 @@
+Loading df_jobs_cleaned.pkl...
+Running NLP pipeline on descriptions. This might take a bit...
+Shape before NLP filter: (123842, 32)
+Shape after NLP: (123824, 32)
+Average length of clean_description: 2874.90 characters
+Ô£à Checkpoint df_jobs_nlp.pkl saved.
+
+--- Example 1 ---
+BEFORE: Job descriptionA leading real estate firm in New Jersey is seeking an administrative Marketing Coordinator with some experience in graphic design. You will be working closely with our fun, kind, ambitious members of the sales team and our dynamic executive team on a daily basis. This is an opportuni
+AFTER : job descriptiona leading real estate firm new jersey seeking administrative marketing coordinator experience graphic design working closely fun kind ambitious member sale team dynamic executive team daily basis opportunity part fast growing highly respected real estate brokerage reputation exception
+
+--- Example 2 ---
+BEFORE: At Aspen Therapy and Wellness , we are committed to serving clients with best practices to help them with change, improvements and better quality of life. We believe in providing a secure, supportive environment to grow as a clinician and learn how to foster longevity in the career which is part of 
+AFTER : aspen therapy wellness committed serving client best practice help change improvement better quality life believe providing secure supportive environment grow clinician learn foster longevity career part mission statement thank taking time explore career excited new group practice community looking 
+
+--- Example 3 ---
+BEFORE: The National Exemplar is accepting applications for an Assistant Restaurant Manager.
+We offer highly competitive wages, healthcare, paid time off, complimentary dining privileges and bonus opportunities. 
+We are a serious, professional, long-standing neighborhood restaurant with over 41 years of ser
+AFTER : national exemplar accepting application assistant restaurant manager offer highly competitive wage healthcare paid time complimentary dining privilege bonus opportunity serious professional long standing neighborhood restaurant year service looking long term fit best class organization apply please 
