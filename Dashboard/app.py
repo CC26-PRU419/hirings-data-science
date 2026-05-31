@@ -35,22 +35,50 @@ st.markdown("""
 @st.cache_data
 def load_linkedin():
     import os
-    # Coba cari data lokal dari folder Arvin jika dijalankan secara lokal
-    local_base = '../Data Wrangling/33k'
+    # Selalu coba load dari folder data teroptimasi terlebih dahulu (sangat cepat & ramah memori)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    opt_base = os.path.join(base_dir, 'data')
     
-    if os.path.exists(local_base):
-        BASE = local_base
+    if os.path.exists(opt_base):
+        BASE = opt_base
     else:
-        # Fallback ke kagglehub jika di-deploy di cloud
-        import kagglehub
-        BASE = kagglehub.dataset_download('arshkon/linkedin-job-postings')
+        # Fallback ke local_base lama (tidak di-ignore secara lokal) atau Kagglehub
+        local_base = '../Data Wrangling/33k'
+        if os.path.exists(local_base):
+            BASE = local_base
+        else:
+            import kagglehub
+            BASE = kagglehub.dataset_download('arshkon/linkedin-job-postings')
+            
+    # Cari path file dengan support subfolder mappings/jobs maupun flat structure
+    postings_path = os.path.join(BASE, 'postings.csv')
+    
+    ind_path = os.path.join(BASE, 'mappings', 'industries.csv')
+    if not os.path.exists(ind_path):
+        ind_path = os.path.join(BASE, 'industries.csv')
         
-    postings   = pd.read_csv(f'{BASE}/postings.csv', low_memory=False)
-    industries = pd.read_csv(f'{BASE}/mappings/industries.csv')
-    skills_map = pd.read_csv(f'{BASE}/mappings/skills.csv')
-    job_skills = pd.read_csv(f'{BASE}/jobs/job_skills.csv')
-    job_ind    = pd.read_csv(f'{BASE}/jobs/job_industries.csv')
-    salaries   = pd.read_csv(f'{BASE}/jobs/salaries.csv')
+    skills_path = os.path.join(BASE, 'mappings', 'skills.csv')
+    if not os.path.exists(skills_path):
+        skills_path = os.path.join(BASE, 'skills.csv')
+        
+    job_skills_path = os.path.join(BASE, 'jobs', 'job_skills.csv')
+    if not os.path.exists(job_skills_path):
+        job_skills_path = os.path.join(BASE, 'job_skills.csv')
+        
+    job_ind_path = os.path.join(BASE, 'jobs', 'job_industries.csv')
+    if not os.path.exists(job_ind_path):
+        job_ind_path = os.path.join(BASE, 'job_industries.csv')
+        
+    salaries_path = os.path.join(BASE, 'jobs', 'salaries.csv')
+    if not os.path.exists(salaries_path):
+        salaries_path = os.path.join(BASE, 'salaries.csv')
+        
+    postings   = pd.read_csv(postings_path, low_memory=False)
+    industries = pd.read_csv(ind_path)
+    skills_map = pd.read_csv(skills_path)
+    job_skills = pd.read_csv(job_skills_path)
+    job_ind    = pd.read_csv(job_ind_path)
+    salaries   = pd.read_csv(salaries_path)
 
     MULT = {'HOURLY':2080,'DAILY':260,'WEEKLY':52,'BIWEEKLY':26,'MONTHLY':12,'YEARLY':1,'ANNUAL':1}
     salaries['multiplier'] = salaries['pay_period'].str.upper().map(MULT).fillna(1)
@@ -69,18 +97,24 @@ def load_linkedin():
 
 @st.cache_data
 def load_jobstreet():
-    # try local copy first (relative path)
     import os
-    local = '../Data Wrangling/salary/job_salary_mean.csv'
-    if os.path.exists(local):
-        df = pd.read_csv(local)
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    opt_file = os.path.join(base_dir, 'data', 'job_salary_mean.csv')
+    
+    if os.path.exists(opt_file):
+        df = pd.read_csv(opt_file)
     else:
-        import kagglehub
-        path = kagglehub.dataset_download('husnind/indonesia-average-job-salary')
-        for root, _, files in os.walk(path):
-            for f in files:
-                if f.endswith('.csv'):
-                    df = pd.read_csv(os.path.join(root, f)); break
+        # try local copy first (relative path)
+        local = '../Data Wrangling/salary/job_salary_mean.csv'
+        if os.path.exists(local):
+            df = pd.read_csv(local)
+        else:
+            import kagglehub
+            path = kagglehub.dataset_download('husnind/indonesia-average-job-salary')
+            for root, _, files in os.walk(path):
+                for f in files:
+                    if f.endswith('.csv'):
+                        df = pd.read_csv(os.path.join(root, f)); break
     df.columns = ['job_title','company','location','salary_mean']
     df = df.drop_duplicates()
     df = df.groupby(['job_title','company','location'], as_index=False)['salary_mean'].median()

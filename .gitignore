@@ -18,6 +18,9 @@ __pycache__/
 1.3m/
 salary/
 
+# Kecuali data dashboard yang sudah diproses & dioptimalkan
+!Dashboard/data/**
+
 # Lainnya
 .DS_Store
 .vscode/
